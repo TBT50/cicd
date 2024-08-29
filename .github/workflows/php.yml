@@ -1,0 +1,25 @@
+name: PHP CI
+
+on:
+  push:
+    branches:
+      - main # Run this workflow on pushes to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3 # Checkout the code from your repository
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2 # Set up the PHP environment
+        with:
+          php-version: "8.0" # Change to your desired PHP version
+
+      - name: Validate index.php
+        run: php -l index.php # Lints the PHP file to check for syntax errors
+
+      - name: Run index.php
+        run: php index.php # Runs the index.php file
